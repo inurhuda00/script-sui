@@ -2,10 +2,9 @@
     "name": "script-sui",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
     "type": "module",
     "scripts": {
-        "dev": "node src/faucet.js",
+        "dev": "npx nodemon src/faucet.js",
         "start:faucet": "pm2 start src/faucet.js --name sui-faucet --watch"
     },
     "keywords": [],

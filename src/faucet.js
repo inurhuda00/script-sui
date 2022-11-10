@@ -1,27 +1,16 @@
-import chalk from "chalk"
-import moment from "moment"
-import request from "request"
+import { getFile, requestFaucet } from "./utils.js"
 
-let recipient = "0x00caf2143062cf199354b759462a10d598510d96"
-
-const asu = async () => {
-    request.post(
-        "https://faucet.devnet.sui.io/gas",
-        {
-            json: {
-                FixedAmountRequest: {
-                    recipient,
-                },
-            },
-        },
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(`[ ${moment().format("HH:mm:ss")} ] `, chalk.green("claim"))
-            }
-        }
-    )
+async function main() {
+    try {
+        const wallets = await getFile("wallet.txt")
+        wallets.forEach((wallet, index) => {
+            setInterval(() => {
+                requestFaucet(wallet)
+            }, 1000)
+        })
+    } catch (err) {
+        console.log(err)
+    }
 }
 
-setInterval(function () {
-    asu()
-}, 1000)
+main()
