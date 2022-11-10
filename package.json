@@ -1,17 +1,19 @@
 {
-  "name": "script-sui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^5.1.2",
-    "moment": "^2.29.4",
-    "request": "^2.88.2"
-  }
+    "name": "script-sui",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "node src/faucet.js",
+        "start:faucet": "pm2 start src/faucet.js --name sui-faucet --watch"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^5.1.2",
+        "moment": "^2.29.4",
+        "request": "^2.88.2"
+    }
 }
