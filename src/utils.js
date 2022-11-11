@@ -4,9 +4,11 @@ import moment from "moment"
 import path from "path"
 import request from "request"
 
+const faucetUri = "https://faucet.testnet.sui.io/gas"
+
 function requestFaucet(recipient) {
     request.post(
-        "https://faucet.devnet.sui.io/gas",
+        faucetUri,
         {
             json: {
                 FixedAmountRequest: {
@@ -15,8 +17,9 @@ function requestFaucet(recipient) {
             },
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log(`[ ${moment().format("HH:mm:ss")} ] `, chalk.green("claim"))
+            const { transferred_gas_objects } = body
+            if (!error && response.statusCode == 201 && !transferred_gas_objects.error) {
+                console.log(`[ ${moment().format("HH:mm:ss")} ] `, chalk.green("dapet sui 🐷"))
             }
         }
     )
